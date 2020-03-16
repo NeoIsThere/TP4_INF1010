@@ -62,10 +62,12 @@ template <typename M>
 std::ostream &operator<<(std::ostream &os, Image<M> *image) {
   for (unsigned int i = 0; i < image->getMatrice()->getHeight(); i++) {
     for (unsigned int j = 0; j < image->getMatrice()->getWidth(); j++)
-      if (j < image->getMatrice()->getWidth() - 1)
-        os << image->getMatrice()->operator()(i, j) << " | ";
-      else
-        os << image->getMatrice()->operator()(i, j) << " |";
+		if (j < image->getMatrice()->getWidth() - 1) {
+			os << image->getMatrice()->operator()(i, j) << " | ";
+		}
+		else {
+			os << image->getMatrice()->operator()(i, j) << " |";
+		}
     os << std::endl;
   }
   return os;

@@ -8,6 +8,7 @@
 #define PIVOTER_MATRICE_H
 
 #include "def.h"
+#include "Pixel.h"
 
 template <class M> class PivoterMatrice {
 public:
@@ -24,12 +25,39 @@ private:
   M *matrice_;
 };
 
+
+
+template <typename M>
+void PivoterMatrice<M>::pivoterMatrice(Direction direction) {
+	int x, y;
+	std::unique_ptr<M> copie = matrice_->clone();
+	for ( int i = 0; i < matrice_->getHeight(); i++) {
+		for (int j = 0; j < matrice_->getWidth(); j++) {
+
+			Coordonnees coo = changerCoordonneesCentreMatrice({ j,i});
+			if (direction == Direction::Left) {
+				x = coo.y, y = -coo.x;
+			}
+			else {
+				x = -coo.y, y = coo.x;
+			}
+			coo = recupererCoordonnees({ x, y });
+			matrice_->ajouterElement(copie->operator()(i, j), coo.y, coo.x);
+		}
+
+
+	}
+}
+
+
+
+
+
+
 /**
  * @brief constructeur par défaut de la classe
  */
-template <class M> inline PivoterMatrice<M>::PivoterMatrice() {
-  // TO DO
-}
+template <class M> inline PivoterMatrice<M>::PivoterMatrice(): matrice_(nullptr){}
 /**
  * @brief constructeur par paramètre de la classe
  */
@@ -42,8 +70,11 @@ inline PivoterMatrice<M>::PivoterMatrice(M *matrice) : matrice_(matrice) {}
 template <class M>
 inline Coordonnees
 PivoterMatrice<M>::changerCoordonneesCentreMatrice(Coordonnees coords) const {
-  // TO DO
-  return {};
+	Coordonnees centree;
+
+	centree.x = coords.x - matrice_->getWidth()/ 2;
+	centree.y = coords.y - matrice_->getHeight()/2;
+	return centree;
 }
 /**
  * @brief revenir au système précédent, trouver les coordonnées du point par
@@ -53,8 +84,23 @@ PivoterMatrice<M>::changerCoordonneesCentreMatrice(Coordonnees coords) const {
 template <class M>
 inline Coordonnees
 PivoterMatrice<M>::recupererCoordonnees(Coordonnees coords) const {
-  // TO DO
-  return {};
+	Coordonnees normale;
+	normale.x = coords.x + matrice_->getWidth() / 2;
+	normale.y = coords.y +matrice_->getHeight() / 2;
+	return normale;
+
+}
+
+template <typename M>
+std::ostream& operator<<(std::ostream& os, PivoterMatrice<M> piv) {
+	for (unsigned int i = 0; i < piv.matrice_->getHeight(); i++) {
+		for (unsigned int j = 0; j < piv.matrice_->getMatrice()->getWidth(); j++)
+			if (j < piv.matrice_->getWidth() - 1) {
+				std::cout << piv.matrice_->operator()(i, j) << " | ";
+			}
+		os << std::endl;
+	}
+	return os;
 }
 
 #endif
