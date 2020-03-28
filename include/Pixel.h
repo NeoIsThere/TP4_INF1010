@@ -1,7 +1,7 @@
 /*
  * Titre : Pixel.h - Travail Pratique #4 - Programmation Orient�e Objet
  * Date : 27 F�vrier 2020
- * Auteur : Nabil Dabouz
+ * Auteur : Nabil Dabouz, Samuel Lavallée et Anthelme Clisson
  */
 
 #ifndef PIXEL_H

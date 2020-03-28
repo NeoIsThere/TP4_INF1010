@@ -1,7 +1,7 @@
 /*
  * Titre : PivoterMatrice.h - Travail Pratique #4 - Programmation Orient�e Objet
  * Date : 27 F�vrier 2020
- * Auteur : Nabil Dabouz
+ * Auteur : Nabil Dabouz, Samuel Lavallée et Anthelme Clisson
  */
 
 #ifndef PIVOTER_MATRICE_H
@@ -26,7 +26,10 @@ private:
 };
 
 
-
+/**
+ * @brief pivoter la matrice à 90 degrés vers la gauche ou la droite
+ * @param Direction, gauche ou droite
+ */
 template <typename M>
 void PivoterMatrice<M>::pivoterMatrice(Direction direction) {
 	int x, y;
@@ -91,6 +94,12 @@ PivoterMatrice<M>::recupererCoordonnees(Coordonnees coords) const {
 
 }
 
+/**
+ * @brief surcharge de l'opérateur << pour l'affichage d'une matrice pivotée
+ * @param ostream, le stream dans lequel afficher
+ * @param PivoterMatrice<M>, la matrice pivotée à afficher
+ * @return ostream pour appel en cascade
+ */
 template <typename M>
 std::ostream& operator<<(std::ostream& os, PivoterMatrice<M> piv) {
 	for (unsigned int i = 0; i < piv.matrice_->getHeight(); i++) {

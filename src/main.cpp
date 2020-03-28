@@ -1,7 +1,7 @@
 /**
  * Fonction main qui test le programme.
  * \file main.cpp
- * \author Nabil Dabouz
+ * \author Nabil Dabouz, Samuel Lavallée et Anthelme Clisson
  * \date 27 Février 2020
  **/
 

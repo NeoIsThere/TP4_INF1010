@@ -1,7 +1,7 @@
 /*
  * Titre : Matrice.h - Travail Pratique #4 - Programmation Orient�e Objet
  * Date : 27 F�vrier 2020
- * Auteur : Nabil Dabouz
+ * Auteur : Nabil Dabouz, Samuel Lavallée et Anthelme Clisson
  */
 
 #ifndef MATRICE_H
@@ -47,6 +47,12 @@ namespace {
 static constexpr int CAPACITE_MATRICE = 100;
 }
 
+/**
+ * @brief surcharge opérateur () pour donner élément à la position spécifiée
+ * @param posX, la colonne de l'élément
+ * @param posY, la ligne de l'élément
+ * @return élément
+ */
 template<typename T>
 T  Matrice<T>::operator()(const size_t& posY, const size_t& posX) const {
 	if (posX >= width_ || posY >= height_) {
@@ -55,6 +61,13 @@ T  Matrice<T>::operator()(const size_t& posY, const size_t& posX) const {
 	return elements_[posY][posX];
 }
 
+/**
+ * @brief ajouter un élément à la position spécifiée 
+ * @param posX, la colonne de l'élément
+ * @param posY, la ligne de l'élément
+ * @param element, l'élément à ajouter
+ * @return élément
+ */
 template<typename T>
 bool  Matrice<T>::ajouterElement(T element, const size_t& posY, const size_t& posX) {
 	if (0 <= posX < width_ && 0 < posY < height_) {
@@ -64,6 +77,13 @@ bool  Matrice<T>::ajouterElement(T element, const size_t& posY, const size_t& po
 	return false;
 }
 
+/**
+ * @brief lire un élément à ajouter à partir d'un stringstream
+ * @param string, stream duquel lire élément
+ * @param posY, la ligne où ajouter l'élément
+ * @param posX, la colonne où ajouter l'élément
+ * @return true si la lecture et l'ajout se sont bien passés false sinon
+ */
 template<typename T>
 bool Matrice<T>::lireElement(const std::string& elementFichier, const size_t& posY, const size_t& posX) {
 	std::istringstream ss(elementFichier);
@@ -76,6 +96,11 @@ bool Matrice<T>::lireElement(const std::string& elementFichier, const size_t& po
 	return false;
 }
 
+/**
+ * @brief ouvrir le fichier à lire et envoyer chaque ligne à la fonction lireElement
+ * @param string, nom du fichier à lire
+ * @return true si les envoies se sont bien passés false sinon
+ */
 template<typename T>
 bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier) {
 	std::ifstream fichier(nomFichier);
@@ -118,7 +143,10 @@ bool Matrice<T>::chargerDepuisFichier(const std::string& nomFichier) {
 		
 	
 
-
+/**
+ * @brief retourne copie allouée dynamiquement de l'objet courant
+ * @return la copie
+ */
 template<typename T>
 std::unique_ptr<Matrice<T>> Matrice<T>::clone() const {
 	Matrice<T> copie;
@@ -128,6 +156,10 @@ std::unique_ptr<Matrice<T>> Matrice<T>::clone() const {
 	return std::make_unique < Matrice<T>>(copie);
 }
 
+/**
+ * @brief ajuster le nombre de lignes 
+ * @param height, le nombre de lignes qu'on veut
+ */
 template<typename T>
 void Matrice<T>::setHeight(size_t height) {
 	bool a = (height > CAPACITE_MATRICE);
@@ -137,6 +169,11 @@ void Matrice<T>::setHeight(size_t height) {
 	
 
 }
+
+/**
+ * @brief ajuster le nombre de colonnes
+ * @param height, le nombre de colonnes qu'on veut
+ */
 template<typename T>
 void Matrice<T>::setWidth(size_t width){
 	bool a = (width > CAPACITE_MATRICE);

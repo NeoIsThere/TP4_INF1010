@@ -1,7 +1,8 @@
 /*
  * Titre : AgrandirMatrice.h - Travail Pratique #4 - Programmation Orient�e
- * Objet Date : 27 F�vrier 2020 Auteur : Nabil Dabouz
+ * Objet Date : 27 F�vrier 2020 Auteurs : Nabil Dabouz, Samuel Lavallée et Anthelme Clisson
  */
+
 
 #ifndef AGRANDIR_MATRICE_H
 #define AGRANDIR_MATRICE_H
@@ -21,6 +22,10 @@ private:
   M *matrice_;
 };
 
+/**
+ * @brief augmenter la taille de la matrice suivant un certain rapport (multiplicateur)
+ * @param rapport, le rapport du redimensionnement de l'image
+ */
 template <class M>
 void AgrandirMatrice<M>::redimensionnerImage(const unsigned int& rapport) {
 	std::unique_ptr<M>copie = move(matrice_->clone());
